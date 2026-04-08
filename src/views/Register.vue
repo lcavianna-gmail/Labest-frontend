@@ -76,7 +76,7 @@ export default {
         this.sucesso = "Usuário criado com sucesso!"
         
         setTimeout(() => {
-          this.$router.push("/login")
+          this.$router.push("/")
         }, 1500)
 
       } catch (error) {
