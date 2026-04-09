@@ -18,7 +18,7 @@
         <input type="password" v-model="confirmPassword" />
       </div>
 
-      <button class="btn btn-primary" @click="register">
+      <button class="btn btn-primary" @click="registrar">
         Registrar
       </button>
     </div>
@@ -35,7 +35,7 @@ export default {
     return {
       email: "",
       password: "",
-      confirmarSenha: "",
+      confirmPassword: "",
       erro: "",
       sucesso: ""
     }
@@ -47,7 +47,7 @@ export default {
       this.erro = ""
       this.sucesso = ""
 
-      if (this.password !== this.confirmarSenha) {
+      if (this.password !== this.confirmPassword) {
         this.erro = "As senhas não coincidem"
         return
       }
