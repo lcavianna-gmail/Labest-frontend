@@ -1,0 +1,88 @@
+/* Reset simples */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Container central padrão */
+.page-container {
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+/* Títulos */
+.page-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* Formulário */
+.form-container {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Grupo de campo */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Botões */
+.btn {
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.btn-primary {
+  background-color: #1f2a44;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #ccc;
+}
+
+.btn-danger {
+  background-color: #c0392b;
+  color: white;
+}
+
+/* Tabela padrão */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #1f2a44;
+  color: white;
+}

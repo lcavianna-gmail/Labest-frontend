@@ -1,14 +1,13 @@
 <template>
-  <div class="container">
-    <h1>Movimentações</h1>
+  <div class="page-container">
+    <h1 class="page-title">Movimentações</h1>
 
-    <button @click="abrirFormulario">
+    <button class="btn btn-primary" @click="abrirFormulario">
       Nova Movimentação
     </button>
 
-    <br /><br />
-
-    <table border="1" width="100%">
+    <!-- TABELA -->
+    <table class="table">
       <thead>
         <tr>
           <th>Produto</th>
@@ -17,6 +16,7 @@
           <th>Data</th>
         </tr>
       </thead>
+
       <tbody>
         <tr v-for="m in movimentacoes" :key="m.id">
           <td>{{ m.produtoNome }}</td>
@@ -27,33 +27,54 @@
       </tbody>
     </table>
 
-    <hr />
+    <!-- FORMULÁRIO -->
+    <div 
+      v-if="mostrarFormulario" 
+      class="form-container" 
+      style="margin-top: 20px;"
+    >
+      <h2 style="margin-bottom: 15px;">
+        Nova Movimentação
+      </h2>
 
-    <div v-if="mostrarFormulario">
-      <h2>Nova Movimentação</h2>
+      <div class="form-group">
+        <label>Produto</label>
+        <select v-model="novaMovimentacao.produtoId">
+          <option disabled value="">Selecione o produto</option>
+          <option 
+            v-for="p in produtos" 
+            :key="p.id" 
+            :value="p.id"
+          >
+            {{ p.nome }}
+          </option>
+        </select>
+      </div>
 
-      <select v-model="novaMovimentacao.produtoId">
-        <option disabled value="">Selecione o produto</option>
-        <option v-for="p in produtos" :key="p.id" :value="p.id">
-          {{ p.nome }}
-        </option>
-      </select>
+      <div class="form-group">
+        <label>Tipo</label>
+        <select v-model="novaMovimentacao.tipo">
+          <option value="Entrada">Entrada</option>
+          <option value="Saida">Saída</option>
+        </select>
+      </div>
 
-      <select v-model="novaMovimentacao.tipo">
-        <option value="Entrada">Entrada</option>
-        <option value="Saida">Saída</option>
-      </select>
+      <div class="form-group">
+        <label>Quantidade</label>
+        <input
+          v-model.number="novaMovimentacao.quantidade"
+          type="number"
+          placeholder="Quantidade"
+        />
+      </div>
 
-      <input
-        v-model.number="novaMovimentacao.quantidade"
-        type="number"
-        placeholder="Quantidade"
-      />
+      <button class="btn btn-primary" @click="salvar">
+        Salvar
+      </button>
 
-      <br /><br />
-
-      <button @click="salvar">Salvar</button>
-      <button @click="cancelar">Cancelar</button>
+      <button class="btn btn-secondary" @click="cancelar">
+        Cancelar
+      </button>
     </div>
   </div>
 </template>

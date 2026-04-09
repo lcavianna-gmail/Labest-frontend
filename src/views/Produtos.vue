@@ -1,33 +1,13 @@
 <template>
-  <div class="container">
-    <h1>Produtos</h1>
+  <div class="page-container">
+    <h1 class="page-title">Produtos</h1>
 
-    <button @click="abrirFormulario">
+    <button class="btn btn-primary" @click="abrirFormulario">
       Novo Produto
     </button>
 
-    <br /><br />
-
-    <div v-if="mostrarFormulario">
-      <h2>{{ editando ? 'Editar Produto' : 'Novo Produto' }}</h2>
-
-      <label>Nome:</label>
-      <input v-model="produto.nome" placeholder="Nome" /> <br/>
-      <label>Preço:</label>
-      <input v-model.number="produto.preco" type="number" placeholder="Preço" /><br/>
-      <label>Quantidade:</label>
-      <input v-model.number="produto.quantidade" type="number" placeholder="Quantidade" />
-
-      <br /><br />
-
-      <button @click="salvar">Salvar</button>
-      <button @click="cancelar">Cancelar</button>
-    </div>
-  </div>
-
-  <br /><br />
-
-    <table border="1" width="100%">
+    <!-- TABELA -->
+    <table class="table">
       <thead>
         <tr>
           <th>Nome</th>
@@ -36,22 +16,63 @@
           <th>Ações</th>
         </tr>
       </thead>
+
       <tbody>
         <tr v-for="p in produtos" :key="p.id">
           <td>{{ p.nome }}</td>
           <td>{{ p.preco }}</td>
           <td>{{ p.quantidade }}</td>
           <td>
-            <button @click="editar(p)">Editar</button>
-            <button @click="remover(p.id)">Excluir</button>
+            <button class="btn btn-primary" @click="editar(p)">
+              Editar
+            </button>
+
+            <button class="btn btn-danger" @click="remover(p.id)">
+              Excluir
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <hr />
+    <!-- FORMULÁRIO -->
+    <div v-if="mostrarFormulario" class="form-container" style="margin-top: 20px;">
+      <h2 style="margin-bottom: 15px;">
+        {{ editando ? 'Editar Produto' : 'Novo Produto' }}
+      </h2>
 
-    
+      <div class="form-group">
+        <label>Nome</label>
+        <input v-model="produto.nome" placeholder="Nome" />
+      </div>
+
+      <div class="form-group">
+        <label>Preço</label>
+        <input 
+          v-model.number="produto.preco" 
+          type="number" 
+          placeholder="Preço" 
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Quantidade</label>
+        <input 
+          v-model.number="produto.quantidade" 
+          type="number" 
+          placeholder="Quantidade" 
+        />
+      </div>
+
+      <button class="btn btn-primary" @click="salvar">
+        Salvar
+      </button>
+
+      <button class="btn btn-secondary" @click="cancelar">
+        Cancelar
+      </button>
+    </div>
+  </div>
 </template>
 
 <script setup>

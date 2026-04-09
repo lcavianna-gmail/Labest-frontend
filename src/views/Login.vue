@@ -1,9 +1,30 @@
 <template>
-  <div>
-    <h2>Login</h2>
-    <input v-model="email" placeholder="Email" />
-    <input v-model="password" type="password" placeholder="Senha" />
-    <button @click="login">Entrar</button>
+  <div class="page-container">
+    <h1 class="page-title">Login</h1>
+
+    <div class="form-container">
+      <div class="form-group">
+        <label>Email</label>
+        <input 
+          type="email"
+          v-model="email"
+          placeholder="Digite seu email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Senha</label>
+        <input 
+          type="password"
+          v-model="password"
+          placeholder="Digite sua senha"
+        />
+      </div>
+
+      <button class="btn btn-primary" @click="login">
+        Entrar
+      </button>
+    </div>
   </div>
 </template>
 

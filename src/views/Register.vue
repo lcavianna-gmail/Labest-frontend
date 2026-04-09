@@ -1,42 +1,27 @@
 <template>
-  <div class="register-container">
-    <h2>Registrar Usuário</h2>
+  <div class="page-container">
+    <h1 class="page-title">Registrar Usuário</h1>
 
-    <form @submit.prevent="registrar">
-      
+    <div class="form-container">
       <div class="form-group">
         <label>Email</label>
-        <input 
-          type="email" 
-          v-model="email" 
-          required 
-        />
+        <input type="email" v-model="email" />
       </div>
 
       <div class="form-group">
         <label>Senha</label>
-        <input 
-          type="password" 
-          v-model="password" 
-          required 
-        />
+        <input type="password" v-model="password" />
       </div>
 
       <div class="form-group">
         <label>Confirmar Senha</label>
-        <input 
-          type="password" 
-          v-model="confirmarSenha" 
-          required 
-        />
+        <input type="password" v-model="confirmPassword" />
       </div>
 
-      <button type="submit">Registrar</button>
-
-      <p v-if="erro" class="erro">{{ erro }}</p>
-      <p v-if="sucesso" class="sucesso">{{ sucesso }}</p>
-
-    </form>
+      <button class="btn btn-primary" @click="register">
+        Registrar
+      </button>
+    </div>
   </div>
 </template>
 
