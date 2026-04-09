@@ -47,6 +47,7 @@ async function login() {
   const response = await api.post<AuthResponse>("/auth/login", payload)
 
   localStorage.setItem("token", response.data.token)
+  window.location.reload()
   router.push("/produtos")
 }
 </script>

@@ -1,52 +1,53 @@
 <template>
   <nav style="background:#1e293b; padding:15px;">
 
-    <router-link 
-      v-if="!authStore.isAuthenticated" 
-      to="/"
-      style="color:white; margin-right:20px;">
-      Login
-    </router-link>
+    <!-- NÃO LOGADO -->
+    <template v-if="!isAuthenticated">
+      <router-link to="/" style="color:white; margin-right:20px;">
+        Login
+      </router-link>
 
-    <router-link 
-      v-if="authStore.isAuthenticated" 
-      to="/produtos"
-      style="color:white; margin-right:20px;">
-      Produtos
-    </router-link>
+      <router-link to="/register" style="color:white; margin-right:20px;">
+        Criar Conta
+      </router-link>
+    </template>
 
-    <router-link 
-  v-if="authStore.isAuthenticated" 
-  to="/auditoria"
-  style="color:white; margin-right:20px;">
-  Auditoria
-</router-link>
+    <!-- LOGADO -->
+    <template v-else>
+      <router-link to="/produtos" style="color:white; margin-right:20px;">
+        Produtos
+      </router-link>
 
-    <router-link 
-      v-if="authStore.isAuthenticated" 
-      to="/movimentacoes"
-      style="color:white; margin-right:20px;">
-      Movimentações
-    </router-link>
+      <router-link to="/auditoria" style="color:white; margin-right:20px;">
+        Auditoria
+      </router-link>
 
-    <button 
-      v-if="authStore.isAuthenticated" 
-      @click="logout"
-      style="margin-left:20px;">
-      Logout
-    </button>
+      <router-link to="/movimentacoes" style="color:white; margin-right:20px;">
+        Movimentações
+      </router-link>
+
+      <button @click="logout" style="margin-left:20px;">
+        Logout
+      </button>
+    </template>
 
   </nav>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
-import { authStore } from "../stores/authStore"
 
 const router = useRouter()
+const isAuthenticated = ref(false)
+
+onMounted(() => {
+  isAuthenticated.value = !!localStorage.getItem("token")
+})
 
 const logout = () => {
-  authStore.logout()
+  localStorage.removeItem("token")
+  isAuthenticated.value = false
   router.push("/")
 }
 </script>
