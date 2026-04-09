@@ -16,6 +16,13 @@
     </router-link>
 
     <router-link 
+  v-if="authStore.isAuthenticated" 
+  to="/auditoria"
+  style="color:white; margin-right:20px;">
+  Auditoria
+</router-link>
+
+    <router-link 
       v-if="authStore.isAuthenticated" 
       to="/movimentacoes"
       style="color:white; margin-right:20px;">
