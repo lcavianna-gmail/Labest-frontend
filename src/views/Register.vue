@@ -5,22 +5,38 @@
     <div class="form-container">
       <div class="form-group">
         <label>Email</label>
-        <input type="email" v-model="email" />
+        <input
+          type="email"
+          v-model="email"
+          @input="erro = ''"
+        />
       </div>
 
       <div class="form-group">
         <label>Senha</label>
-        <input type="password" v-model="password" />
+        <input
+          type="password"
+          v-model="password"
+          @input="erro = ''"
+        />
       </div>
 
       <div class="form-group">
         <label>Confirmar Senha</label>
-        <input type="password" v-model="confirmPassword" />
+        <input
+          type="password"
+          v-model="confirmPassword"
+          @input="erro = ''"
+        />
       </div>
 
       <button class="btn btn-primary" @click="registrar">
         Registrar
       </button>
+
+      <!-- MENSAGENS -->
+      <p v-if="erro" class="erro">{{ erro }}</p>
+      <p v-if="sucesso" class="sucesso">{{ sucesso }}</p>
     </div>
   </div>
 </template>
@@ -43,9 +59,14 @@ export default {
 
   methods: {
     async registrar() {
-
       this.erro = ""
       this.sucesso = ""
+
+      // validação básica
+      if (!this.email || !this.password || !this.confirmPassword) {
+        this.erro = "Preencha todos os campos"
+        return
+      }
 
       if (this.password !== this.confirmPassword) {
         this.erro = "As senhas não coincidem"
@@ -59,17 +80,19 @@ export default {
         })
 
         this.sucesso = "Usuário criado com sucesso!"
-        
+
         setTimeout(() => {
           this.$router.push("/")
         }, 1500)
 
       } catch (error) {
-  console.log(error.response)
-  this.erro = error.response?.data?.message 
-           || JSON.stringify(error.response?.data)
-           || "Erro ao registrar"
-}
+        console.log(error.response)
+
+        this.erro =
+          error.response?.data?.message ||
+          JSON.stringify(error.response?.data) ||
+          "Erro ao registrar"
+      }
     }
   }
 }
@@ -97,12 +120,14 @@ button {
 }
 
 .erro {
-  color: red;
+  color: #dc2626;
   margin-top: 10px;
+  font-weight: 500;
 }
 
 .sucesso {
-  color: green;
+  color: #16a34a;
   margin-top: 10px;
+  font-weight: 500;
 }
 </style>
